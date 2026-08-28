@@ -956,12 +956,17 @@ function copiarCampo(id){
   document.execCommand('copy');
 }
 
+// Endereço padrão do Apps Script já implantado pelo professor.
+// Se o aluno colar outro endereço no campo, o valor salvo no navegador
+// (localStorage) tem prioridade sobre este padrão.
+const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdLpFVQuFaqww2AGFSsKGnB6_Uuml4Xlb1jjkLM6AkJG_X2SdSZlX7GJAaV32jK0cm/exec';
+
 function salvarScriptUrl(){
   const url = document.getElementById('scriptUrlInput').value.trim();
   if(url){ localStorage.setItem('apps_script_url', url); atualizarStatusSync(); }
 }
 function atualizarStatusSync(){
-  const url = localStorage.getItem('apps_script_url');
+  const url = localStorage.getItem('apps_script_url') || DEFAULT_SCRIPT_URL;
   const box = document.getElementById('syncStatusBox');
   if(url){
     box.innerHTML = `<b>Conectado.</b> Endereço configurado: <span class="mono">${url.slice(0,42)}...</span>`;
@@ -972,7 +977,7 @@ function atualizarStatusSync(){
 }
 
 async function enviarTudoAgora(){
-  const url = localStorage.getItem('apps_script_url');
+  const url = localStorage.getItem('apps_script_url') || DEFAULT_SCRIPT_URL;
   gerarTextoDoc();
   gerarCSVParticipacao();
   if(!url){
