@@ -244,6 +244,36 @@ textarea.code-out{font-family:'Space Mono',monospace;font-size:11.5px;background
 
 .footer-note{font-size:12px;color:#8a9188;text-align:center;padding:26px;}
 
+/* ---------- instruções pré-login ---------- */
+.instrucoes-wrap{max-width:760px;width:100%;padding:8px 4px 40px;}
+.instrucoes-hero{
+  background:var(--forest-2);color:#fff;border-radius:18px;padding:34px 34px 28px;margin-bottom:20px;position:relative;overflow:hidden;
+}
+.instrucoes-hero::after{content:"🌱";position:absolute;right:24px;top:18px;font-size:70px;opacity:.14;}
+.instrucoes-hero .eyebrow{color:#bcdfc7;}
+.instrucoes-hero h2{color:#fff;font-size:27px;margin-bottom:8px;}
+.instrucoes-hero p{color:#dbe4d9;font-size:14.5px;margin:0;max-width:560px;}
+.passo{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px;
+  display:flex;gap:16px;align-items:flex-start;
+}
+.passo .num{
+  flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--moss);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-weight:700;font-size:15px;
+}
+.passo h4{font-size:15.5px;margin-bottom:5px;}
+.passo p{font-size:13.8px;color:#4a534c;margin:0;}
+.passo ul{margin:8px 0 0;padding-left:18px;font-size:13.5px;color:#4a534c;}
+.passo ul li{margin-bottom:4px;}
+.dica-box{
+  background:var(--water-2);border:1px solid #bcdae6;border-radius:12px;padding:16px 18px;margin:18px 0;font-size:13.8px;color:#284a5c;
+}
+.dica-box b{color:var(--water);}
+.avaliacao-box{
+  background:#fbf1e6;border:1px solid #ecd6ad;border-left:4px solid var(--ochre);border-radius:10px;padding:14px 18px;margin:18px 0;font-size:13.8px;color:#6b4c14;
+}
+.instrucoes-actions{display:flex;justify-content:center;margin-top:26px;}
+
 /* responsive */
 @media (max-width:880px){
   .shell{grid-template-columns:1fr;}
@@ -270,8 +300,91 @@ textarea.code-out{font-family:'Space Mono',monospace;font-size:11.5px;background
   </div>
 </div>
 
+<!-- INSTRUÇÕES (antes do login) -->
+<div class="screen-center" id="instrucoesScreen">
+  <div class="instrucoes-wrap">
+    <div class="instrucoes-hero">
+      <div class="eyebrow">Antes de entrar</div>
+      <h2>Como funciona a atividade em grupo</h2>
+      <p>Leiam esta página <b>com o grupo reunido</b> antes de fazer login. Ela explica o que vocês vão fazer, em que ordem, e como cada um deve participar. Depois de ler, clique em "Entendi, vamos começar" para entrar com seu nome.</p>
+    </div>
+
+    <div class="passo">
+      <div class="num">1</div>
+      <div>
+        <h4>O que é esta atividade</h4>
+        <p>Vocês vão participar de um <b>RPG (jogo de interpretação de papéis)</b>. Cada grupo representa um lado diferente da mesma história: uma área de 5.000 hectares pode virar uma Unidade de Conservação, e cada grupo vai defender o ponto de vista de um papel — gestores públicos, comunidade local, ONG ambientalista, cientistas ou especialistas em recursos hídricos.</p>
+      </div>
+    </div>
+
+    <div class="passo">
+      <div class="num">2</div>
+      <div>
+        <h4>Descubram qual é o grupo de vocês</h4>
+        <p>A maioria da turma já tem grupo formado (Grupos 1 a 5). Se o seu nome não estiver em nenhum grupo, você e até 3 colegas podem formar um grupo novo na tela de entrada:</p>
+        <ul>
+          <li>Um integrante clica em <b>"Criar novo grupo"</b> e recebe um código (ex.: <span class="mono">LIVRE-3F2A</span>).</li>
+          <li>Os demais colegas digitam esse mesmo código em <b>"Entrar com código de grupo"</b>.</li>
+          <li>Combinem isso antes de todos abrirem a plataforma, para não perder tempo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="passo">
+      <div class="num">3</div>
+      <div>
+        <h4>Conversem antes de escrever</h4>
+        <p>Mesmo que só uma pessoa digite por vez, <b>a discussão é de todos</b>. Antes de responder qualquer pergunta:</p>
+        <ul>
+          <li>Leiam a pergunta em voz alta para o grupo.</li>
+          <li>Cada integrante dá sua opinião, pensando no papel que o grupo representa.</li>
+          <li>Só depois de combinarem, escrevam a resposta final — ela deve representar o grupo, não uma pessoa só.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="passo">
+      <div class="num">4</div>
+      <div>
+        <h4>A ordem das etapas dentro da plataforma</h4>
+        <ul>
+          <li><b>Situação-problema</b> — leiam o cenário e vejam os papéis de todos os grupos.</li>
+          <li><b>Aula 7 · Discussão do grupo</b> — respondam as 4 perguntas que definem a proposta inicial do grupo.</li>
+          <li><b>Aula 8 · Apresentação e negociação</b> — registrem a proposta, anotem o que os outros grupos disseram e o que foi negociado.</li>
+          <li><b>Plano de Manejo</b> — depois da negociação da turma toda, preencham as 11 seções do plano final, já com os acordos feitos.</li>
+          <li><b>Conexões com outras aulas</b> — toquem nos pontos do "rio" para relacionar o RPG com o que já foi estudado nas Aulas 1 a 9.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="passo">
+      <div class="num">5</div>
+      <div>
+        <h4>O que faz uma boa resposta</h4>
+        <ul>
+          <li>Justifique a escolha do grupo — não basta responder, expliquem <b>por quê</b>, com base no papel que representam.</li>
+          <li>Pesquisem em fontes confiáveis quando precisarem de dados reais (leis, tipos de UC, exemplos de matas ciliares etc.).</li>
+          <li>Nas conexões com outras aulas, tragam o que já foi aprendido — evolução, biodiversidade, impactos humanos, hidrografia — não apenas repitam a resposta anterior.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dica-box">
+      💾 <b>Não se preocupem em perder o trabalho:</b> tudo o que o grupo escreve é salvo automaticamente, poucos segundos depois de parar de digitar. Vocês podem sair e voltar depois — é só entrar de novo com o mesmo nome.
+    </div>
+
+    <div class="avaliacao-box">
+      📋 <b>Como a participação é avaliada:</b> a plataforma registra automaticamente quem escreveu o quê, em qual pergunta e quanto cada um contribuiu. Por isso é importante que <b>cada integrante digite pelo menos parte das respostas</b> — não só uma pessoa do grupo. A qualidade da reflexão conta tanto quanto a participação.
+    </div>
+
+    <div class="instrucoes-actions">
+      <button class="btn btn-primary" style="padding:13px 30px;font-size:15px;" onclick="irParaLogin()">Entendi, vamos começar →</button>
+    </div>
+  </div>
+</div>
+
 <!-- LOGIN -->
-<div class="screen-center" id="loginScreen">
+<div class="screen-center" id="loginScreen" style="display:none;">
   <div class="login-card">
     <div class="eyebrow">Aula Desafio · RPG</div>
     <h2>Quem está entrando na oficina?</h2>
@@ -607,6 +720,11 @@ function defaultGroupData(id, papelId){
 /* ============================================================
    LOGIN
    ============================================================ */
+function irParaLogin(){
+  document.getElementById('instrucoesScreen').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+}
+
 let buscaSelecionado = null;
 
 document.getElementById('buscaAluno').addEventListener('input', (e)=>{
@@ -708,6 +826,7 @@ async function iniciarSessao(aluno, grupoId){
 
   localStorage.setItem('sessao_atual', JSON.stringify({numero:aluno.numero, grupoId}));
 
+  document.getElementById('instrucoesScreen').style.display='none';
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('appShell').classList.add('active');
   document.getElementById('topbarUserArea').style.display='flex';
@@ -729,6 +848,7 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     try{
       const {numero, grupoId} = JSON.parse(sess);
       const aluno = ALUNOS.find(a=>a.numero===numero) || {numero, nome:'Aluno', ra:'', dig:'', grupo:grupoId};
+      document.getElementById('instrucoesScreen').style.display='none';
       await iniciarSessao(aluno, grupoId);
     }catch(e){}
   }
