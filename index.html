@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Manejo — RPG Ambiental | 9º Ano A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1F3B2C;
+  --forest-2:#173023;
+  --moss:#4C7A57;
+  --sand:#F3EEE1;
+  --paper:#FBF9F3;
+  --water:#2C6E91;
+  --water-2:#dbeaf1;
+  --ochre:#B9862F;
+  --ink:#1B2320;
+  --coral:#A6432F;
+  --line:#d9d0bd;
+  --card:#ffffff;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--sand);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  line-height:1.55;
+  min-height:100vh;
+}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:700;margin:0 0 .4em 0;color:var(--forest-2);}
+.mono{font-family:'Space Mono',monospace;}
+a{color:var(--water);}
+button{font-family:'Inter',sans-serif;cursor:pointer;}
+::selection{background:var(--ochre);color:#fff;}
+
+/* ---------- top bar ---------- */
+.topbar{
+  background:var(--forest);
+  color:#fff;
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  position:sticky;top:0;z-index:50;
+  box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand .leaf{font-size:26px;line-height:1;}
+.brand-text h1{color:#fff;font-size:17px;margin:0;letter-spacing:.2px;}
+.brand-text span{font-size:11.5px;color:#c9d8cc;font-family:'Space Mono',monospace;letter-spacing:.5px;text-transform:uppercase;}
+.topbar-right{display:flex;align-items:center;gap:10px;font-size:13px;}
+.pill{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  padding:5px 12px;
+  border-radius:20px;
+  font-size:12.5px;
+}
+.btn{
+  border:none;border-radius:8px;padding:9px 16px;font-size:13.5px;font-weight:600;
+  transition:transform .12s, box-shadow .12s;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--ochre);color:#fff;}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);}
+.btn-outline{background:#fff;color:var(--forest);border:1px solid var(--line);}
+.btn-water{background:var(--water);color:#fff;}
+.btn-sm{padding:6px 12px;font-size:12.5px;border-radius:7px;}
+
+/* ---------- login screen ---------- */
+.screen-center{
+  min-height:calc(100vh - 62px);
+  display:flex;align-items:center;justify-content:center;
+  padding:32px 16px;
+}
+.login-card{
+  background:var(--card);
+  max-width:560px;width:100%;
+  border-radius:18px;
+  padding:38px 36px 32px;
+  box-shadow:0 20px 50px rgba(31,59,44,.15);
+  border:1px solid var(--line);
+  position:relative;
+  overflow:hidden;
+}
+.login-card::before{
+  content:"";position:absolute;top:-60px;right:-60px;width:180px;height:180px;
+  background:radial-gradient(circle, var(--moss) 0%, transparent 70%);opacity:.18;
+}
+.eyebrow{
+  font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--water);margin-bottom:8px;
+}
+.login-card h2{font-size:26px;margin-bottom:6px;}
+.login-sub{color:#5b6660;font-size:14.5px;margin-bottom:26px;}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--forest-2);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.4px;}
+input[type=text], select, textarea{
+  width:100%;border:1.5px solid var(--line);border-radius:9px;padding:11px 13px;
+  font-size:14.5px;font-family:'Inter',sans-serif;background:#fff;color:var(--ink);
+}
+input[type=text]:focus, select:focus, textarea:focus{outline:2px solid var(--water);outline-offset:1px;border-color:var(--water);}
+#buscaResultados{
+  margin-top:8px;border:1px solid var(--line);border-radius:9px;max-height:220px;overflow:auto;background:#fff;
+}
+.res-item{padding:10px 13px;font-size:14px;border-bottom:1px solid #f1ede1;cursor:pointer;display:flex;justify-content:space-between;}
+.res-item:hover{background:var(--water-2);}
+.res-item:last-child{border-bottom:none;}
+.res-item .num{font-family:'Space Mono',monospace;color:var(--water);font-size:12px;}
+.selected-student{
+  margin-top:14px;background:var(--water-2);border:1px solid #b9d6e4;border-radius:10px;padding:14px 16px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.selected-student .name{font-weight:700;color:var(--forest-2);}
+.selected-student .grp{font-size:12.5px;color:var(--water);font-family:'Space Mono',monospace;}
+.login-actions{margin-top:24px;display:flex;gap:10px;}
+.divider{display:flex;align-items:center;gap:12px;margin:26px 0 4px;color:#a3a396;font-size:12px;font-family:'Space Mono',monospace;text-transform:uppercase;}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line);}
+.free-group-box{margin-top:14px;padding:16px;background:var(--sand);border-radius:10px;border:1px dashed var(--ochre);}
+.small-note{font-size:12.5px;color:#6b7368;margin-top:6px;}
+.err{color:var(--coral);font-size:13px;margin-top:8px;display:none;}
+
+/* ---------- app shell ---------- */
+.app{display:none;}
+.app.active{display:block;}
+.shell{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  min-height:calc(100vh - 62px);
+}
+.sidebar{
+  background:var(--forest-2);
+  color:#e9efe8;
+  padding:26px 20px;
+}
+.role-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:18px;margin-bottom:18px;
+}
+.role-card .role-eyebrow{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ochre);}
+.role-card h3{color:#fff;font-size:18px;margin:6px 0 8px;}
+.role-card p{font-size:13px;color:#c7d1c8;margin:0;}
+.members-list{list-style:none;margin:0;padding:0;font-size:13px;}
+.members-list li{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;}
+.members-list li:last-child{border:none;}
+.member-badge{
+  width:20px;height:20px;border-radius:50%;background:var(--moss);color:#fff;
+  font-size:10px;display:inline-flex;align-items:center;justify-content:center;margin-right:8px;
+  font-family:'Space Mono',monospace;
+}
+.sidebar h4{color:#fff;font-size:12.5px;text-transform:uppercase;letter-spacing:.6px;font-family:'Space Mono',monospace;margin:22px 0 10px;}
+.progress-track{background:rgba(255,255,255,.12);border-radius:20px;height:8px;overflow:hidden;margin-top:8px;}
+.progress-fill{background:linear-gradient(90deg,var(--ochre),#e0aa4f);height:100%;border-radius:20px;transition:width .4s;}
+.progress-label{font-size:11.5px;color:#c7d1c8;margin-top:5px;font-family:'Space Mono',monospace;}
+.nav-links{list-style:none;padding:0;margin:24px 0 0;}
+.nav-links button{
+  width:100%;text-align:left;background:none;border:none;color:#c7d1c8;padding:10px 4px;
+  font-size:13.5px;border-radius:8px;display:flex;align-items:center;gap:8px;
+}
+.nav-links button:hover{background:rgba(255,255,255,.06);color:#fff;}
+
+/* main content */
+.main{padding:32px 40px 80px;max-width:980px;}
+.tab{display:none;}
+.tab.active{display:block;animation:fadein .25s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.tab-title{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+.tab-title .aula-tag{
+  font-family:'Space Mono',monospace;background:var(--forest);color:#fff;padding:3px 10px;border-radius:6px;font-size:11.5px;
+}
+.lede{color:#5b6660;font-size:15px;max-width:680px;margin-bottom:28px;}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:22px;
+}
+.card h3{font-size:18px;}
+.question-block{margin-bottom:22px;}
+.question-block:last-child{margin-bottom:0;}
+.qnum{
+  display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--moss);color:#fff;
+  align-items:center;justify-content:center;font-size:12.5px;font-family:'Space Mono',monospace;margin-right:8px;
+}
+.qtext{font-weight:600;color:var(--forest-2);font-size:15px;}
+.answer-area{margin-top:10px;position:relative;}
+textarea{min-height:90px;resize:vertical;}
+.save-status{font-size:11.5px;color:#8a9188;margin-top:5px;font-family:'Space Mono',monospace;display:flex;gap:8px;align-items:center;}
+.save-dot{width:6px;height:6px;border-radius:50%;background:#c7c2b0;}
+.save-dot.saved{background:var(--moss);}
+.connection-box{
+  background:linear-gradient(135deg,var(--water-2),#eef6f9);
+  border:1px solid #bcdae6;border-left:4px solid var(--water);
+  border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13.5px;color:#284a5c;
+}
+.connection-box b{color:var(--water);}
+.situacao{
+  background:var(--forest-2);color:#eef2ec;border-radius:16px;padding:28px 30px;margin-bottom:26px;
+  position:relative;overflow:hidden;
+}
+.situacao::after{content:"🌿";position:absolute;right:20px;top:20px;font-size:60px;opacity:.12;}
+.situacao h3{color:#fff;}
+.situacao p{font-size:14.5px;color:#dbe4d9;}
+
+/* plano de manejo table */
+.plano-row{border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden;}
+.plano-head{
+  background:var(--sand);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;
+}
+.plano-head h4{margin:0;font-size:15.5px;}
+.plano-head .link-tag{font-size:11px;font-family:'Space Mono',monospace;color:var(--water);background:var(--water-2);padding:3px 8px;border-radius:12px;}
+.plano-body{padding:16px 18px;display:none;background:#fff;}
+.plano-body.open{display:block;}
+.pergunta-guia{font-size:13px;color:#6b7368;font-style:italic;margin-bottom:8px;}
+
+/* river / connections tab */
+.river-wrap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px;margin-bottom:24px;overflow-x:auto;}
+.river-svg{min-width:760px;display:block;margin:0 auto;}
+.river-node{cursor:pointer;}
+.river-node circle{transition:r .15s;}
+.river-node:hover circle{r:16;}
+.river-node text{font-family:'Space Mono',monospace;font-size:11px;fill:var(--forest-2);}
+.aula-drawer{display:none;margin-top:16px;padding:18px 20px;background:var(--sand);border-radius:12px;border:1px solid var(--line);}
+.aula-drawer.open{display:block;}
+.aula-drawer h4{font-size:15px;margin-bottom:6px;}
+.aula-drawer .tema{font-size:12px;font-family:'Space Mono',monospace;color:var(--ochre);text-transform:uppercase;margin-bottom:8px;}
+
+/* export panel */
+.export-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media (max-width:720px){.export-grid{grid-template-columns:1fr;}}
+.export-card h4{font-size:15px;margin-bottom:6px;}
+.export-card p{font-size:13px;color:#5b6660;margin-bottom:12px;}
+textarea.code-out{font-family:'Space Mono',monospace;font-size:11.5px;background:#faf8f2;height:150px;}
+.copybtn-row{display:flex;gap:8px;margin-top:10px;}
+
+/* professor panel */
+.prof-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+.prof-table th{text-align:left;background:var(--sand);padding:10px 12px;font-family:'Space Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--forest-2);}
+.prof-table td{padding:10px 12px;border-bottom:1px solid #f1ede1;}
+.bar-mini{height:6px;background:#eee;border-radius:6px;overflow:hidden;width:80px;display:inline-block;vertical-align:middle;margin-right:8px;}
+.bar-mini span{display:block;height:100%;background:var(--moss);}
+.badge-role{font-size:10.5px;font-family:'Space Mono',monospace;background:var(--water-2);color:var(--water);padding:2px 8px;border-radius:10px;}
+
+.footer-note{font-size:12px;color:#8a9188;text-align:center;padding:26px;}
+
+/* responsive */
+@media (max-width:880px){
+  .shell{grid-template-columns:1fr;}
+  .sidebar{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;}
+  .role-card{flex:1 1 260px;}
+  .main{padding:24px 18px 60px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span class="leaf">🌱</span>
+    <div class="brand-text">
+      <h1>Plano de Manejo — RPG Ambiental</h1>
+      <span>Ciências · 9º Ano A · 3º Bimestre · Aulas 7 e 8</span>
+    </div>
+  </div>
+  <div class="topbar-right" id="topbarUserArea" style="display:none;">
+    <span class="pill" id="pillGrupo">Grupo —</span>
+    <span class="pill" id="pillAluno">—</span>
+    <button class="btn btn-ghost btn-sm" onclick="logout()">Sair</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="screen-center" id="loginScreen">
+  <div class="login-card">
+    <div class="eyebrow">Aula Desafio · RPG</div>
+    <h2>Quem está entrando na oficina?</h2>
+    <p class="login-sub">Digite seu nome ou número de chamada para encontrar seu grupo. Se você ainda não tem grupo, pode formar um novo aqui (até 4 integrantes).</p>
+
+    <label for="buscaAluno">Seu nome ou número</label>
+    <input type="text" id="buscaAluno" placeholder="Ex.: Marcela ou 30" autocomplete="off">
+    <div id="buscaResultados"></div>
+    <div id="selectedStudentBox" style="display:none;" class="selected-student">
+      <div>
+        <div class="name" id="selName"></div>
+        <div class="grp" id="selGrp"></div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="limparSelecao()">Trocar</button>
+    </div>
+    <div class="err" id="loginErr"></div>
+
+    <div class="login-actions">
+      <button class="btn btn-primary" style="flex:1" onclick="entrarPlataforma()">Entrar na oficina →</button>
+    </div>
+
+    <div class="divider">ainda sem grupo?</div>
+    <div class="free-group-box">
+      <label style="margin-top:0;">Criar um grupo livre</label>
+      <p class="small-note">Você forma seu próprio grupo (até 4 pessoas). Compartilhe o código gerado com seus colegas — eles entram com o mesmo código na próxima tela.</p>
+      <button class="btn btn-water btn-sm" onclick="criarGrupoLivre()">+ Criar novo grupo</button>
+      <label style="margin-top:14px;">Entrar com código de grupo</label>
+      <div style="display:flex;gap:8px;">
+        <input type="text" id="codigoGrupo" placeholder="Ex.: LIVRE-3F2A" style="flex:1">
+        <button class="btn btn-outline btn-sm" onclick="entrarComCodigo()">Entrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="appShell">
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="role-card">
+        <div class="role-eyebrow" id="sbGrupoLabel">GRUPO 1</div>
+        <h3 id="sbPapel">Gestores de órgãos públicos</h3>
+        <p id="sbPapelDesc">Responsáveis legais pela criação, regulamentação e fiscalização da Unidade de Conservação.</p>
+      </div>
+
+      <h4>Integrantes</h4>
+      <ul class="members-list" id="sbMembros"></ul>
+
+      <h4>Progresso do grupo</h4>
+      <div class="progress-track"><div class="progress-fill" id="sbProgressFill" style="width:0%"></div></div>
+      <div class="progress-label" id="sbProgressLabel">0% concluído</div>
+
+      <ul class="nav-links">
+        <li><button onclick="showTab('situacao')">🗺️ Situação-problema</button></li>
+        <li><button onclick="showTab('aula7')">💬 Aula 7 · Discussão do grupo</button></li>
+        <li><button onclick="showTab('aula8')">🤝 Aula 8 · Apresentação e negociação</button></li>
+        <li><button onclick="showTab('plano')">📋 Plano de Manejo</button></li>
+        <li><button onclick="showTab('conexoes')">🔗 Conexões com outras aulas</button></li>
+        <li><button onclick="showTab('exportar')">☁️ Enviar para o Google</button></li>
+        <li><button onclick="showTab('professor')">🧑‍🏫 Painel do professor</button></li>
+      </ul>
+    </aside>
+
+    <main class="main">
+
+      <!-- SITUAÇÃO-PROBLEMA -->
+      <section class="tab" id="tab-situacao">
+        <div class="tab-title"><span class="aula-tag">AULA 7</span></div>
+        <h2>Conhecendo a situação-problema</h2>
+        <p class="lede">Antes de discutir com seu grupo, releia com atenção o cenário que vocês vão enfrentar. Cada grupo vai defender um ponto de vista diferente sobre a mesma área.</p>
+
+        <div class="situacao">
+          <h3>A área em disputa</h3>
+          <p>Uma área de aproximadamente <b>5.000 hectares</b>, em região de grande importância ecológica, foi identificada por órgãos públicos como potencial Unidade de Conservação. Ela abriga espécies da fauna e da flora — algumas ameaçadas de extinção —, além de rios, nascentes e vegetação nativa preservada.</p>
+          <p>Perto dali vive uma <b>comunidade tradicional</b> que depende diretamente dos recursos naturais: agricultura de pequeno porte, pesca, coleta e práticas culturais passadas entre gerações.</p>
+          <p>Nos últimos anos, a região sofre pressões crescentes — avanço da agricultura, desmatamento, uso inadequado do solo — gerando conflito entre a preservação da biodiversidade e os interesses sociais e econômicos ligados ao uso da terra. O governo estadual decidiu iniciar a criação da UC e pediu a colaboração de diferentes grupos para elaborar um <b>Plano de Manejo</b>.</p>
+        </div>
+
+        <div class="card">
+          <h3>Os grupos envolvidos</h3>
+          <div id="listaPapeis"></div>
+        </div>
+
+        <button class="btn btn-primary" onclick="showTab('aula7')">Ir para a discussão do grupo →</button>
+      </section>
+
+      <!-- AULA 7 -->
+      <section class="tab" id="tab-aula7">
+        <div class="tab-title"><span class="aula-tag">AULA 7</span></div>
+        <h2>Discussão sobre os principais pontos</h2>
+        <p class="lede">Discutam internamente e construam, juntos, as respostas abaixo <b>a partir do papel que o grupo representa</b>. Pesquisem em fontes confiáveis para justificar as escolhas — essas respostas serão a base da apresentação de vocês na Aula 8.</p>
+
+        <div class="card">
+          <div id="perguntasAula7"></div>
+        </div>
+      </section>
+
+      <!-- AULA 8 -->
+      <section class="tab" id="tab-aula8">
+        <div class="tab-title"><span class="aula-tag">AULA 8</span></div>
+        <h2>Apresentação das propostas e negociação entre os grupos</h2>
+        <p class="lede">Cada grupo apresenta a proposta construída na Aula 7. Depois, é hora de negociar: ouvir os outros pontos de vista, ceder em alguns pontos e defender o que for essencial para a preservação da área.</p>
+
+        <div class="card">
+          <h3>Etapa 1 · Registro da apresentação do grupo</h3>
+          <div class="question-block">
+            <div class="qtext"><span class="qnum">1</span>Qual tipo de Unidade de Conservação o grupo defende, e por quê?</div>
+            <div class="answer-area"><textarea data-field="a8_tipo_uc" placeholder="Registrem a proposta final do grupo..."></textarea><div class="save-status"><span class="save-dot"></span><span class="save-text">não salvo</span></div></div>
+          </div>
+          <div class="question-block">
+            <div class="qtext"><span class="qnum">2</span>Quais prioridades de proteção orientaram as escolhas do grupo?</div>
+            <div class="answer-area"><textarea data-field="a8_prioridades"></textarea><div class="save-status"><span class="save-dot"></span><span class="save-text">não salvo</span></div></div>
+          </div>
+          <div class="question-block">
+            <div class="qtext"><span class="qnum">3</span>Enquanto os outros grupos apresentam: anotem semelhanças, diferenças e possíveis conflitos entre as propostas.</div>
+            <div class="answer-area"><textarea data-field="a8_anotacoes_apresentacao" placeholder="O que os outros grupos propuseram? Onde há conflito com a proposta de vocês?"></textarea><div class="save-status"><span class="save-dot"></span><span class="save-text">não salvo</span></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Etapa 2 · Negociação entre os grupos</h3>
+          <p style="font-size:13.5px;color:#5b6660;">Lembrem-se: negociar envolve fazer concessões. Nem tudo o que o grupo propôs no início poderá ser mantido do mesmo jeito.</p>
+          <div class="question-block">
+            <div class="qtext"><span class="qnum">1</span>Quais propostas do grupo podem ser mantidas sem gerar impactos ambientais significativos?</div>
+            <div class="answer-area"><textarea data-field="a8_neg_manter"></textarea><div class="save-status"><span class="save-dot"></span><span class="save-text">não salvo</span></div></div>
+          </div>
+          <div class="question-block">
+            <div class="qtext"><span class="qnum">2</span>Quais ideias precisaram ser ajustadas para atender a mais de um grupo? O que foi cedido?</div>
+            <div class="answer-area"><textarea data-field="a8_neg_ajustes"></textarea><div class="save-status"><span class="save-dot"></span><span class="save-text">não salvo</span></div></div>
+          </div>
+          <div class="question-block">
+            <div class="qtext"><span class="qnum">3</span>Quais decisões o grupo considera essenciais para garantir a preservação da área a longo prazo, mesmo após a negociação?</div>
+            <div class="answer-area"><textarea data-field="a8_neg_essencial"></textarea><div class="save-status"><span class="save-dot"></span><span class="save-text">não salvo</span></div></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="showTab('plano')">Construir o Plano de Manejo →</button>
+      </section>
+
+      <!-- PLANO DE MANEJO -->
+      <section class="tab" id="tab-plano">
+        <div class="tab-title"><span class="aula-tag">AULA 8 · ATIVIDADE 2</span></div>
+        <h2>Produção do Plano de Manejo</h2>
+        <p class="lede">Depois da negociação, registrem aqui as decisões acordadas para cada seção do plano coletivo da turma. Cliquem em cada tópico para abrir.</p>
+        <div id="planoManejo"></div>
+      </section>
+
+      <!-- CONEXÕES -->
+      <section class="tab" id="tab-conexoes">
+        <div class="tab-title"><span class="aula-tag">3º BIMESTRE</span></div>
+        <h2>Conexões com outras aulas</h2>
+        <p class="lede">O rio abaixo representa o caminho que a turma percorreu neste bimestre. Toque em cada ponto para ver como aquele conteúdo se conecta com a proposta que <b>o grupo de vocês</b> está construindo — e respondam à reflexão.</p>
+
+        <div class="river-wrap">
+          <svg class="river-svg" viewBox="0 0 760 190" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10,100 C120,40 180,160 280,100 C380,40 440,160 540,100 C600,70 640,120 690,90" stroke="#2C6E91" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.35"/>
+            <g id="riverNodes"></g>
+          </svg>
+        </div>
+        <div class="aula-drawer" id="aulaDrawer"></div>
+      </section>
+
+      <!-- EXPORTAR -->
+      <section class="tab" id="tab-exportar">
+        <div class="tab-title"><span class="aula-tag">REGISTRO</span></div>
+        <h2>Enviar o trabalho do grupo para o Google</h2>
+        <p class="lede">O trabalho de todos os grupos deve ficar registrado no Google Docs <b>"Atividade em Grupo 9ºAno A"</b> (uma página por grupo) e a participação individual na planilha Google Sheets, aba <b>"Grupo 9ºAno A"</b>.</p>
+
+        <div class="card" id="liveSyncCard" style="border-color:#bcdae6;">
+          <h3>🔄 Envio automático (recomendado)</h3>
+          <p style="font-size:13.5px;color:#5b6660;">Se o(a) professor(a) já configurou a integração, os dados são enviados automaticamente sempre que o grupo salva uma resposta. Status atual:</p>
+          <div id="syncStatusBox" class="connection-box" style="margin-top:10px;">Nenhum endereço de integração configurado ainda nesta plataforma.</div>
+          <div style="margin-top:14px;">
+            <label style="margin-top:0;">Endereço do Apps Script (fornecido pelo professor)</label>
+            <div style="display:flex;gap:8px;">
+              <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/AAA.../exec">
+              <button class="btn btn-water btn-sm" onclick="salvarScriptUrl()">Salvar</button>
+            </div>
+            <p class="small-note">Isso só precisa ser feito uma vez por navegador/dispositivo. Veja o arquivo <span class="mono">GUIA-DE-CONFIGURACAO.md</span> para instruções de como o professor gera esse endereço.</p>
+          </div>
+          <div class="copybtn-row">
+            <button class="btn btn-primary btn-sm" onclick="enviarTudoAgora()">Enviar agora ao Google</button>
+          </div>
+        </div>
+
+        <div class="export-grid">
+          <div class="card export-card">
+            <h4>📄 Texto para o Google Docs</h4>
+            <p>Se a integração automática não estiver disponível, copie o texto abaixo e cole em uma página nova do documento <span class="mono">"Atividade em Grupo 9ºAno A"</span>.</p>
+            <textarea class="code-out" id="docOut" readonly></textarea>
+            <div class="copybtn-row">
+              <button class="btn btn-outline btn-sm" onclick="gerarTextoDoc()">Gerar texto</button>
+              <button class="btn btn-primary btn-sm" onclick="copiarCampo('docOut')">Copiar</button>
+            </div>
+          </div>
+          <div class="card export-card">
+            <h4>📊 Linha para o Google Sheets</h4>
+            <p>Registro de participação individual (por aluno) pronto para colar na aba <span class="mono">"Grupo 9ºAno A"</span>.</p>
+            <textarea class="code-out" id="sheetOut" readonly></textarea>
+            <div class="copybtn-row">
+              <button class="btn btn-outline btn-sm" onclick="gerarCSVParticipacao()">Gerar linhas</button>
+              <button class="btn btn-primary btn-sm" onclick="copiarCampo('sheetOut')">Copiar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROFESSOR -->
+      <section class="tab" id="tab-professor">
+        <div class="tab-title"><span class="aula-tag">VISÃO GERAL</span></div>
+        <h2>Painel do professor</h2>
+        <p class="lede">Acompanhamento de progresso por grupo e participação individual, calculada automaticamente a partir das interações de cada aluno nos campos da atividade (nº de contribuições e volume de texto produzido).</p>
+
+        <div class="card">
+          <h3>Progresso por grupo</h3>
+          <table class="prof-table" id="tabelaGrupos"><thead><tr><th>Grupo</th><th>Papel</th><th>Progresso</th><th>Integrantes ativos</th></tr></thead><tbody></tbody></table>
+        </div>
+
+        <div class="card">
+          <h3>Participação individual</h3>
+          <table class="prof-table" id="tabelaParticipacao"><thead><tr><th>Aluno</th><th>Grupo</th><th>Contribuições</th><th>Palavras escritas</th><th>Engajamento</th></tr></thead><tbody></tbody></table>
+          <div class="copybtn-row" style="margin-top:14px;">
+            <button class="btn btn-outline btn-sm" onclick="baixarCSVGeral()">Baixar CSV completo</button>
+            <button class="btn btn-water btn-sm" onclick="enviarTudoAgora()">Sincronizar tudo com o Google Sheets</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="footer-note">Unidade de Conservação · Preservação Ambiental — Ciências, 9º Ano A, 3º Bimestre. Conteúdo-base: Aulas 6, 7 e 8 (páginas 28–38) e conexões com as Aulas 1 a 9.</div>
+
+<script>
+/* ============================================================
+   DADOS: ALUNOS, GRUPOS, PAPÉIS, CONTEÚDO
+   ============================================================ */
+const ALUNOS = [{"numero": 1, "nome": "ALICE CARVALHO", "ra": "114160176", "dig": "X", "grupo": 4}, {"numero": 2, "nome": "AMANDA PASSOS DE ALMEIDA", "ra": "115864899", "dig": "6", "grupo": 3}, {"numero": 5, "nome": "ANA JÚLIA MENEZES DA SILVA", "ra": "115079886", "dig": "5", "grupo": null}, {"numero": 7, "nome": "ARTHUR COHEN BARRETO", "ra": "116651899", "dig": "1", "grupo": 1}, {"numero": 8, "nome": "ARTHUR DAVI DE SOUZA FERNANDES", "ra": "115287899", "dig": "2", "grupo": 3}, {"numero": 10, "nome": "EDUARDA ALVES DE SOUZA", "ra": "115507309", "dig": "5", "grupo": 5}, {"numero": 11, "nome": "EMANUEL ALVES OLIVEIRA", "ra": "112971413", "dig": "5", "grupo": null}, {"numero": 12, "nome": "ESTHER CRISTINE SILVA RIBEIRO", "ra": "113216026", "dig": "1", "grupo": 5}, {"numero": 13, "nome": "EVELLYN ALVES DA SILVA", "ra": "121483284", "dig": "2", "grupo": 4}, {"numero": 14, "nome": "EVELLYN YASMIN TAVARES SILVA", "ra": "120570957", "dig": "5", "grupo": 2}, {"numero": 15, "nome": "FELIPE DE SOUZA RODRIGUES", "ra": "115879478", "dig": "2", "grupo": 3}, {"numero": 16, "nome": "FERNANDA POLACHINI MAYER GOMES MARQUES", "ra": "113220165", "dig": "2", "grupo": 2}, {"numero": 17, "nome": "GUSTAVO AUGUSTO TOMBOLO REIS", "ra": "121486964", "dig": "6", "grupo": 3}, {"numero": 19, "nome": "HINGRID SARAIVA DOS SANTOS", "ra": "115343277", "dig": "8", "grupo": null}, {"numero": 20, "nome": "IGOR MARTINS PEREIRA", "ra": "115083615", "dig": "5", "grupo": null}, {"numero": 21, "nome": "ISABELLA DOS SANTOS SALDANHA", "ra": "115076210", "dig": "X", "grupo": 5}, {"numero": 22, "nome": "KAUANNY APARECIDA MALAQUIAS LIMA", "ra": "115077275", "dig": "X", "grupo": 2}, {"numero": 23, "nome": "KÉTHILY NAYARA DA SILVA", "ra": "114160080", "dig": "8", "grupo": 5}, {"numero": 24, "nome": "LEONARDO DE AVELAR CARVALHO", "ra": "115077491", "dig": "5", "grupo": 4}, {"numero": 25, "nome": "LIVIA OLIVEIRA NASCIMENTO", "ra": "116528242", "dig": "2", "grupo": null}, {"numero": 26, "nome": "LOHRAN ROMUALDO MENDES DA SILVA", "ra": "115885441", "dig": "9", "grupo": null}, {"numero": 27, "nome": "LUANA KAROLINE MARTINS DE OLIVEIRA", "ra": "114150635", "dig": "X", "grupo": null}, {"numero": 28, "nome": "LUIS MIGUEL GONÇALVES DA SILVA", "ra": "123848645", "dig": "9", "grupo": null}, {"numero": 29, "nome": "MANUELLA DE MORAES SOUZA", "ra": "114143738", "dig": "7", "grupo": null}, {"numero": 30, "nome": "MARCELA ROBERTO DE OLIVEIRA", "ra": "115077815", "dig": "5", "grupo": 2}, {"numero": 34, "nome": "MELISSA VICTORIA DE OLIVEIRA CARVALHO", "ra": "115887628", "dig": "2", "grupo": 2}, {"numero": 35, "nome": "MIGUEL MARTINS DE ASSIS", "ra": "113221116", "dig": "5", "grupo": 5}, {"numero": 36, "nome": "OMRAN RASEKH", "ra": "124600717", "dig": "4", "grupo": 1}, {"numero": 37, "nome": "PATRICIA SEGURA", "ra": "115077465", "dig": "4", "grupo": null}, {"numero": 39, "nome": "RAUL HENRIQUE CRUS BAPTISTA", "ra": "114169380", "dig": "X", "grupo": 4}, {"numero": 40, "nome": "SARAH VITORIA ALVES OLIVEIRA", "ra": "115077243", "dig": "8", "grupo": 3}, {"numero": 41, "nome": "YURI GABRIEL DE MORAES PONGOLINO", "ra": "115077239", "dig": "6", "grupo": null}, {"numero": 42, "nome": "ZAYN AL ABIDIN RASULI", "ra": "125460635", "dig": "X", "grupo": 1}, {"numero": 43, "nome": "MATHEUS TURCHETTO", "ra": "113210966", "dig": "8", "grupo": 1}, {"numero": 46, "nome": "DAVID HENRIQUE SILVA DOS SANTOS", "ra": "114253876", "dig": "X", "grupo": null}, {"numero": 47, "nome": "ABRAHAM PAGES ROJO", "ra": "126699052", "dig": "5", "grupo": null}, {"numero": 48, "nome": "BRENO GOUVEA NALIN", "ra": "115866442", "dig": "4", "grupo": null}];
+
+const PAPEIS = {
+  1:{nome:"Gestores de órgãos públicos", desc:"Responsáveis legais pela criação, regulamentação e fiscalização da UC. Buscam equilíbrio entre preservação e viabilidade social/econômica, com acesso a leis, mapas e dados oficiais — mas sofrem pressão política.", cor:"#B9862F"},
+  2:{nome:"Comunidade local (moradores tradicionais)", desc:"Vivem perto da área e dependem dos recursos naturais para subsistência: água, pesca, agricultura, práticas culturais. Têm profundo conhecimento do território, mas baixa influência política.", cor:"#4C7A57"},
+  3:{nome:"ONG Ambientalista", desc:"Defende a máxima proteção da fauna, flora e ecossistemas, priorizando zonas de proteção integral. Baseia-se em dados de conservação e mobilização da opinião pública — o que pode gerar conflito com a comunidade local.", cor:"#2C6E91"},
+  4:{nome:"Cientistas e ambientalistas técnicos", desc:"Fornecem dados científicos sobre fauna, flora, água e solo para embasar as decisões, prevendo riscos (incêndios, secas) e propondo indicadores de monitoramento — mas têm pouco poder político direto.", cor:"#A6432F"},
+  5:{nome:"Especialistas em Recursos Hídricos e Biodiversidade", desc:"Papel criado para esta turma, conectando o RPG às Aulas 4, 5, 6 e 9: cuidam da relação entre bacias hidrográficas, matas ciliares, nascentes e a manutenção da biodiversidade e dos processos evolutivos das espécies da região.", cor:"#6b4fa0"}
+};
+
+// aulas para o "rio" de conexões — mapeadas por papel (1..5)
+const AULAS_CONEXAO = [
+ {id:1, titulo:"Aula 1 — Adaptação e especiação", tema:"Evolução", texto:"O isolamento geográfico de populações — dentro e fora da área da UC — pode favorecer a especiação ou, ao contrário, aumentar o risco de extinção por perda de fluxo gênico.",
+   reflexao:{1:"Como as regras de zoneamento que o grupo propõe podem evitar o isolamento excessivo de populações de animais dentro da UC?",2:"As práticas tradicionais da comunidade interferem no deslocamento de espécies pela área? Como?",3:"Que corredores ecológicos a ONG defenderia para manter o fluxo gênico entre populações?",4:"Como os cientistas monitorariam sinais de isolamento populacional na área?",5:"De que forma a bacia hidrográfica local funciona como corredor ecológico para a fauna e a flora?"}},
+ {id:2, titulo:"Aula 2 — Cladogramas e grupos monofiléticos", tema:"Evolução", texto:"Cladogramas ajudam a entender o parentesco entre espécies da região e a priorizar a proteção de linhagens evolutivas únicas ou ameaçadas.",
+   reflexao:{1:"Ao decidir o que proteger, o poder público deveria considerar a singularidade evolutiva das espécies (não só a quantidade de indivíduos)? Por quê?",2:"A comunidade reconhece alguma espécie local como culturalmente importante, mesmo que cientificamente comum?",3:"Que espécies a ONG destacaria como prioritárias por serem evolutivamente únicas na região?",4:"Como um cladograma ajudaria os cientistas a justificar tecnicamente a proteção de uma espécie específica?",5:"Espécies aquáticas dessa bacia têm parentesco próximo com espécies de outras regiões? Isso muda a prioridade de proteção?"}},
+ {id:3, titulo:"Aula 3 — Teoria da Evolução, fósseis e genética", tema:"Evolução", texto:"Análises genéticas mostram o quanto uma população está isolada ou saudável geneticamente — informação estratégica para o Plano de Manejo.",
+   reflexao:{1:"Que tipo de estudo genético o poder público poderia exigir antes de aprovar restrições de uso?",2:"Como explicar à comunidade, em linguagem simples, por que a diversidade genética das espécies locais importa?",3:"A ONG usaria dados genéticos para reforçar pedidos de proteção total de uma área?",4:"Que análises os cientistas do grupo proporiam para avaliar a saúde genética das populações da UC?",5:"A qualidade da água da bacia hidrográfica pode afetar a saúde genética das populações aquáticas? Como?"}},
+ {id:4, titulo:"Aula 4 — Biodiversidade", tema:"Biodiversidade", texto:"Biodiversidade é a variabilidade de organismos vivos, ecossistemas e a diversidade dentro e entre espécies — o conceito central que justifica a criação da UC.",
+   reflexao:{1:"Como o grupo definiria, em uma frase, a importância da biodiversidade da área para justificar a criação da UC perante a sociedade?",2:"Que elementos da biodiversidade local a comunidade já reconhece e usa no seu dia a dia?",3:"Quais indicadores de biodiversidade a ONG usaria para medir o sucesso da UC?",4:"Que metodologia os cientistas usariam para inventariar a biodiversidade da área antes da criação da UC?",5:"Como a diversidade de ambientes ao longo da bacia hidrográfica (nascente, curso, foz) aumenta a biodiversidade regional?"}},
+ {id:5, titulo:"Aula 5 — Ações humanas e impactos na biodiversidade", tema:"Impacto ambiental", texto:"Atividades humanas — desmatamento, agricultura, poluição — pressionam a biodiversidade da região onde a UC será criada.",
+   reflexao:{1:"Que ações humanas identificadas na Aula 5 mais preocupam o poder público nesta área específica?",2:"Quais dessas ações fazem parte da própria subsistência da comunidade? Como equilibrar isso com a preservação?",3:"Que impacto humano a ONG consideraria mais urgente de restringir?",4:"Como os cientistas mediriam, na prática, os impactos humanos já causados na área?",5:"Como o desmatamento das margens (matas ciliares) amplia os impactos humanos sobre os recursos hídricos?"}},
+ {id:6, titulo:"Aula 6 — Unidades de Conservação e Instituto Florestal", tema:"Conservação", texto:"UCs são áreas definidas pelo poder público para proteger ambientes; o Instituto Florestal tem papel na administração e conservação dessas áreas.",
+   reflexao:{1:"Que categoria de UC (proteção integral ou uso sustentável) o grupo escolheria, e qual seria o papel do Instituto Florestal na gestão?",2:"Como a categoria de UC escolhida pelo grupo afeta diretamente o modo de vida da comunidade?",3:"Por que a ONG normalmente defende categorias de proteção integral?",4:"Que dados técnicos justificariam, para o Instituto Florestal, a categoria de UC escolhida?",5:"Áreas de proteção de mananciais (Aula 9) se relacionam com que categoria de UC estudada na Aula 6?"}},
+ {id:9, titulo:"Aula 9 — Bacias hidrográficas e matas ciliares", tema:"Hidrografia", texto:"A água escoa das áreas mais altas para as mais baixas, formando bacias hidrográficas; as matas ciliares protegem as margens de rios e nascentes.",
+   reflexao:{1:"Que regras o poder público deveria criar para proteger nascentes e matas ciliares dentro da UC?",2:"A comunidade usa a água do rio para quê? Que uso pode continuar e qual precisa ser restrito?",3:"Por que a ONG defenderia a recuperação das matas ciliares mesmo em áreas já degradadas?",4:"Que indicadores de qualidade da água os cientistas monitorariam na bacia?",5:"Descreva como a proteção da mata ciliar da bacia local sustenta toda a cadeia de biodiversidade da UC — feche a conexão entre hidrografia, biodiversidade e evolução das espécies aquáticas."}}
+];
+
+const PLANO_TOPICOS = [
+ {id:"plano_intro", titulo:"Introdução", link:"Conecta com Aula 4 (Biodiversidade)", pergunta:"Qual é a importância ecológica e social da área? Quais são os objetivos gerais do plano?"},
+ {id:"plano_carac", titulo:"Caracterização da área", link:"Conecta com Aula 9 (Bacias hidrográficas)", pergunta:"Onde fica a área? Quais são seus recursos naturais, biodiversidade e histórico de uso?"},
+ {id:"plano_diag", titulo:"Diagnóstico socioeconômico", link:"Conecta com Aula 5 (Ações humanas)", pergunta:"Quem vive na região? Quais atividades econômicas existem? Há conflitos?"},
+ {id:"plano_zonif", titulo:"Zonificação", link:"Conecta com Aula 6 (Categorias de UC)", pergunta:"Quais áreas devem ser preservadas? Quais podem ter uso sustentável?"},
+ {id:"plano_gestao", titulo:"Gestão e conservação", link:"Conecta com Aulas 1–3 (Evolução/isolamento)", pergunta:"Quais estratégias serão usadas para proteger, recuperar e monitorar a área?"},
+ {id:"plano_uso", titulo:"Uso público", link:"", pergunta:"Qual é o potencial para turismo sustentável? Que ações ambientais podem ser promovidas?"},
+ {id:"plano_particip", titulo:"Participação comunitária", link:"", pergunta:"Como a comunidade local será envolvida nas decisões e na gestão?"},
+ {id:"plano_ativ", titulo:"Atividades permitidas e restrições", link:"", pergunta:"Que atividades podem ocorrer? Quais devem ser restritas ou proibidas?"},
+ {id:"plano_fiscal", titulo:"Fiscalização e monitoramento", link:"Conecta com Aula 2 (Cladogramas/indicadores)", pergunta:"Como será feito o acompanhamento? Quais indicadores serão usados?"},
+ {id:"plano_susten", titulo:"Sustentabilidade financeira", link:"Conecta com Aula 6 (Instituto Florestal)", pergunta:"Quais são as possíveis fontes de recursos, parcerias e meios de manutenção?"},
+ {id:"plano_revisao", titulo:"Revisão do plano", link:"", pergunta:"Em quanto tempo o plano deve ser revisado? Que critérios indicarão necessidade de ajustes?"}
+];
+
+const PERGUNTAS_A7 = [
+ {campo:"a7_tipo_uc", texto:"Qual tipo de Unidade de Conservação seria mais adequado para essa área, considerando o papel do grupo de vocês?"},
+ {campo:"a7_recursos", texto:"Quais recursos naturais da área precisam ser protegidos, na visão do grupo?"},
+ {campo:"a7_restricoes", texto:"Quais restrições e permissões de uso da área devem ser implementadas?"},
+ {campo:"a7_atividades", texto:"Quais atividades devem ser permitidas ou proibidas dentro da UC?"}
+];
+
+/* ============================================================
+   ESTADO / STORAGE
+   ============================================================ */
+let currentStudent = null;   // {numero, nome, ra, dig, grupo}
+let currentGroupId = null;
+let groupData = null;        // objeto salvo (respostas, membros, log)
+let saveTimers = {};
+
+const hasWidgetStorage = () => (typeof window.storage !== 'undefined' && window.storage);
+
+async function storeGet(key, shared){
+  try{
+    if(hasWidgetStorage()){
+      const r = await window.storage.get(key, !!shared);
+      return r ? JSON.parse(r.value) : null;
+    }
+  }catch(e){ /* key not found or widget storage unavailable */ }
+  try{
+    const v = localStorage.getItem((shared?'shared:':'local:')+key);
+    return v ? JSON.parse(v) : null;
+  }catch(e){ return null; }
+}
+async function storeSet(key, value, shared){
+  const json = JSON.stringify(value);
+  let okWidget = false;
+  if(hasWidgetStorage()){
+    try{ await window.storage.set(key, json, !!shared); okWidget = true; }catch(e){}
+  }
+  try{ localStorage.setItem((shared?'shared:':'local:')+key, json); }catch(e){}
+  return okWidget;
+}
+
+function groupKey(id){ return 'grupo:'+id; }
+
+function defaultGroupData(id, papelId){
+  return {
+    id: id,
+    papel: papelId,
+    membros: [],          // {numero, nome}
+    respostas: {},         // campo -> texto
+    log: [],               // {aluno, numero, campo, palavras, ts}
+    criadoEm: Date.now()
+  };
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+let buscaSelecionado = null;
+
+document.getElementById('buscaAluno').addEventListener('input', (e)=>{
+  const q = e.target.value.trim().toLowerCase();
+  const box = document.getElementById('buscaResultados');
+  box.innerHTML = '';
+  if(!q){ return; }
+  const results = ALUNOS.filter(a=>{
+    return a.nome.toLowerCase().includes(q) || String(a.numero) === q;
+  }).slice(0,8);
+  results.forEach(a=>{
+    const div = document.createElement('div');
+    div.className = 'res-item';
+    const grupoTxt = a.grupo ? ('Grupo '+a.grupo) : 'sem grupo ainda';
+    div.innerHTML = `<span>${a.nome}</span><span class="num">nº${a.numero} · ${grupoTxt}</span>`;
+    div.onclick = ()=> selecionarAluno(a);
+    box.appendChild(div);
+  });
+});
+
+function selecionarAluno(a){
+  buscaSelecionado = a;
+  document.getElementById('buscaResultados').innerHTML='';
+  document.getElementById('buscaAluno').value='';
+  document.getElementById('selName').textContent = a.nome + ' (nº '+a.numero+')';
+  document.getElementById('selGrp').textContent = a.grupo ? ('Grupo '+a.grupo+' · '+PAPEIS[a.grupo].nome) : 'Ainda sem grupo — crie ou entre em um grupo livre abaixo';
+  document.getElementById('selectedStudentBox').style.display='flex';
+  document.getElementById('loginErr').style.display='none';
+}
+function limparSelecao(){
+  buscaSelecionado = null;
+  document.getElementById('selectedStudentBox').style.display='none';
+}
+
+async function entrarPlataforma(){
+  const err = document.getElementById('loginErr');
+  if(!buscaSelecionado){
+    err.textContent = 'Selecione seu nome na lista de busca, ou forme/entre em um grupo livre abaixo.';
+    err.style.display='block';
+    return;
+  }
+  if(!buscaSelecionado.grupo){
+    err.textContent = 'Você ainda não tem grupo. Use "Criar novo grupo" ou "Entrar com código de grupo" logo abaixo.';
+    err.style.display='block';
+    return;
+  }
+  await iniciarSessao(buscaSelecionado, buscaSelecionado.grupo);
+}
+
+async function criarGrupoLivre(){
+  if(!buscaSelecionado){
+    document.getElementById('loginErr').textContent = 'Primeiro selecione seu nome na busca acima.';
+    document.getElementById('loginErr').style.display='block';
+    return;
+  }
+  const code = 'LIVRE-' + Math.random().toString(36).slice(2,6).toUpperCase();
+  const papelId = ((Math.floor(Math.random()*5))+1); // papel provisório; pode variar por grupo livre
+  const data = defaultGroupData(code, papelId);
+  await storeSet(groupKey(code), data, true);
+  alert('Grupo criado! Código do grupo: ' + code + '\\n\\nAnote e compartilhe com até 3 colegas. Eles devem digitar esse código no campo "Entrar com código de grupo".');
+  await iniciarSessao(buscaSelecionado, code);
+}
+
+async function entrarComCodigo(){
+  const code = document.getElementById('codigoGrupo').value.trim().toUpperCase();
+  if(!buscaSelecionado){
+    document.getElementById('loginErr').textContent = 'Primeiro selecione seu nome na busca acima.';
+    document.getElementById('loginErr').style.display='block';
+    return;
+  }
+  if(!code){ return; }
+  const data = await storeGet(groupKey(code), true);
+  if(!data){
+    document.getElementById('loginErr').textContent = 'Código de grupo não encontrado. Confira com o colega que criou o grupo.';
+    document.getElementById('loginErr').style.display='block';
+    return;
+  }
+  if(data.membros.length >= 4 && !data.membros.find(m=>m.numero===buscaSelecionado.numero)){
+    document.getElementById('loginErr').textContent = 'Esse grupo já tem 4 integrantes.';
+    document.getElementById('loginErr').style.display='block';
+    return;
+  }
+  await iniciarSessao(buscaSelecionado, code);
+}
+
+async function iniciarSessao(aluno, grupoId){
+  currentStudent = aluno;
+  currentGroupId = grupoId;
+  let data = await storeGet(groupKey(grupoId), true);
+  if(!data){
+    const papelId = typeof grupoId === 'number' ? grupoId : 1;
+    data = defaultGroupData(grupoId, papelId);
+  }
+  if(!data.membros.find(m=>m.numero===aluno.numero)){
+    data.membros.push({numero:aluno.numero, nome:aluno.nome});
+  }
+  await storeSet(groupKey(grupoId), data, true);
+  groupData = data;
+
+  localStorage.setItem('sessao_atual', JSON.stringify({numero:aluno.numero, grupoId}));
+
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('appShell').classList.add('active');
+  document.getElementById('topbarUserArea').style.display='flex';
+  document.getElementById('pillGrupo').textContent = 'Grupo ' + grupoId;
+  document.getElementById('pillAluno').textContent = aluno.nome.split(' ')[0] + ' (nº' + aluno.numero + ')';
+
+  montarApp();
+}
+
+function logout(){
+  localStorage.removeItem('sessao_atual');
+  location.reload();
+}
+
+// tenta restaurar sessão
+window.addEventListener('DOMContentLoaded', async ()=>{
+  const sess = localStorage.getItem('sessao_atual');
+  if(sess){
+    try{
+      const {numero, grupoId} = JSON.parse(sess);
+      const aluno = ALUNOS.find(a=>a.numero===numero) || {numero, nome:'Aluno', ra:'', dig:'', grupo:grupoId};
+      await iniciarSessao(aluno, grupoId);
+    }catch(e){}
+  }
+});
+
+/* ============================================================
+   MONTAGEM DO APP
+   ============================================================ */
+function montarApp(){
+  const papel = PAPEIS[groupData.papel] || PAPEIS[1];
+  document.getElementById('sbGrupoLabel').textContent = 'GRUPO ' + currentGroupId;
+  document.getElementById('sbPapel').textContent = papel.nome;
+  document.getElementById('sbPapelDesc').textContent = papel.desc;
+
+  const membrosUl = document.getElementById('sbMembros');
+  membrosUl.innerHTML = '';
+  groupData.membros.forEach(m=>{
+    const li = document.createElement('li');
+    const inic = m.nome.split(' ').map(p=>p[0]).slice(0,2).join('');
+    li.innerHTML = `<span><span class="member-badge">${inic}</span>${m.nome.split(' ').slice(0,2).join(' ')}</span><span class="mono" style="opacity:.6;">nº${m.numero}</span>`;
+    membrosUl.appendChild(li);
+  });
+
+  montarListaPapeis();
+  montarPerguntasA7();
+  montarPlano();
+  montarRio();
+  ligarCamposSalvamento();
+  atualizarProgresso();
+  showTab('situacao');
+}
+
+function montarListaPapeis(){
+  const el = document.getElementById('listaPapeis');
+  el.innerHTML = '';
+  Object.keys(PAPEIS).forEach(id=>{
+    const p = PAPEIS[id];
+    const own = Number(id) === groupData.papel;
+    const div = document.createElement('div');
+    div.style.cssText = `padding:12px 14px;border-radius:10px;margin-bottom:8px;border:1px solid ${own?p.cor:'#e5e0d0'};background:${own?p.cor+'14':'#fafaf6'};`;
+    div.innerHTML = `<b style="color:${p.cor};">${own?'★ Grupo '+currentGroupId+' — ':''}${p.nome}</b><div style="font-size:13px;color:#5b6660;margin-top:4px;">${p.desc}</div>`;
+    el.appendChild(div);
+  });
+}
+
+function campoHtml(campo, placeholder){
+  const val = (groupData.respostas[campo]||'');
+  return `<div class="answer-area">
+    <textarea data-field="${campo}" placeholder="${placeholder||''}">${val}</textarea>
+    <div class="save-status"><span class="save-dot ${val?'saved':''}"></span><span class="save-text">${val?'salvo':'não salvo'}</span></div>
+  </div>`;
+}
+
+function montarPerguntasA7(){
+  const el = document.getElementById('perguntasAula7');
+  el.innerHTML = PERGUNTAS_A7.map((q,i)=>`
+    <div class="question-block">
+      <div class="qtext"><span class="qnum">${i+1}</span>${q.texto}</div>
+      ${campoHtml(q.campo)}
+    </div>
+  `).join('');
+}
+
+function montarPlano(){
+  const el = document.getElementById('planoManejo');
+  el.innerHTML = PLANO_TOPICOS.map((t,i)=>`
+    <div class="plano-row">
+      <div class="plano-head" onclick="togglePlano(${i})">
+        <h4>${t.titulo}</h4>
+        ${t.link? `<span class="link-tag">🔗 ${t.link}</span>`:''}
+      </div>
+      <div class="plano-body" id="planoBody${i}">
+        <div class="pergunta-guia">${t.pergunta}</div>
+        ${campoHtml(t.id, "Resposta acordada do grupo/turma...")}
+      </div>
+    </div>
+  `).join('');
+}
+function togglePlano(i){
+  document.getElementById('planoBody'+i).classList.toggle('open');
+}
+
+function montarRio(){
+  const svgNs = 'http://www.w3.org/2000/svg';
+  const g = document.getElementById('riverNodes');
+  g.innerHTML = '';
+  const positions = [
+    [70,88],[170,140],[280,88],[380,140],[470,88],[560,140],[680,95]
+  ];
+  AULAS_CONEXAO.forEach((a, idx)=>{
+    const [x,y] = positions[idx];
+    const node = document.createElementNS(svgNs,'g');
+    node.setAttribute('class','river-node');
+    node.setAttribute('transform',`translate(${x},${y})`);
+    node.onclick = ()=> abrirAula(a.id);
+    const circ = document.createElementNS(svgNs,'circle');
+    circ.setAttribute('r','12'); circ.setAttribute('fill', groupData.respostas['reflexao_'+a.id] ? '#4C7A57' : '#B9862F');
+    circ.setAttribute('stroke','#fff'); circ.setAttribute('stroke-width','2');
+    node.appendChild(circ);
+    const txt = document.createElementNS(svgNs,'text');
+    txt.setAttribute('text-anchor','middle'); txt.setAttribute('y','30');
+    txt.textContent = 'Aula ' + a.id;
+    node.appendChild(txt);
+    g.appendChild(node);
+  });
+}
+
+function abrirAula(id){
+  const a = AULAS_CONEXAO.find(x=>x.id===id);
+  const drawer = document.getElementById('aulaDrawer');
+  const campo = 'reflexao_'+id;
+  drawer.innerHTML = `
+    <div class="tema">${a.tema}</div>
+    <h4>${a.titulo}</h4>
+    <p style="font-size:14px;color:#3d443e;">${a.texto}</p>
+    <div class="connection-box"><b>Reflexão para o papel do seu grupo:</b> ${a.reflexao[groupData.papel]}</div>
+    ${campoHtml(campo, "Escrevam a resposta do grupo aqui...")}
+  `;
+  drawer.classList.add('open');
+  ligarCamposSalvamento();
+}
+
+/* ============================================================
+   NAVEGAÇÃO
+   ============================================================ */
+function showTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='professor'){ montarPainelProfessor(); }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ============================================================
+   SALVAMENTO / PARTICIPAÇÃO
+   ============================================================ */
+function ligarCamposSalvamento(){
+  document.querySelectorAll('textarea[data-field]').forEach(ta=>{
+    if(ta.dataset.bound) return;
+    ta.dataset.bound = '1';
+    ta.addEventListener('input', ()=>{
+      const wrap = ta.closest('.answer-area');
+      const dot = wrap.querySelector('.save-dot');
+      const label = wrap.querySelector('.save-text');
+      dot.classList.remove('saved');
+      label.textContent = 'salvando...';
+      const campo = ta.dataset.field;
+      clearTimeout(saveTimers[campo]);
+      saveTimers[campo] = setTimeout(async ()=>{
+        await salvarCampo(campo, ta.value);
+        dot.classList.add('saved');
+        label.textContent = 'salvo agora';
+      }, 700);
+    });
+  });
+}
+
+async function salvarCampo(campo, valor){
+  groupData.respostas[campo] = valor;
+  const palavras = valor.trim() ? valor.trim().split(/\\s+/).length : 0;
+  groupData.log.push({
+    aluno: currentStudent.nome, numero: currentStudent.numero, campo, palavras, ts: Date.now()
+  });
+  await storeSet(groupKey(currentGroupId), groupData, true);
+  atualizarProgresso();
+}
+
+function atualizarProgresso(){
+  const totalCampos = PERGUNTAS_A7.length + 6 /*a8 fields*/ + PLANO_TOPICOS.length + AULAS_CONEXAO.length;
+  const preenchidos = Object.values(groupData.respostas).filter(v=>v && v.trim().length>3).length;
+  const pct = Math.min(100, Math.round((preenchidos/totalCampos)*100));
+  document.getElementById('sbProgressFill').style.width = pct+'%';
+  document.getElementById('sbProgressLabel').textContent = pct+'% concluído';
+}
+
+/* ============================================================
+   EXPORTAÇÃO — GOOGLE DOCS / SHEETS
+   ============================================================ */
+function textoCompletoGrupo(){
+  const papel = PAPEIS[groupData.papel];
+  let out = `ATIVIDADE EM GRUPO 9ºANO A — PLANO DE MANEJO (RPG AMBIENTAL)\\n`;
+  out += `GRUPO ${currentGroupId} · Papel: ${papel.nome}\\n`;
+  out += `Integrantes: ${groupData.membros.map(m=>m.nome+' (nº'+m.numero+')').join('; ')}\\n`;
+  out += `\\n— AULA 7: DISCUSSÃO DO GRUPO —\\n`;
+  PERGUNTAS_A7.forEach((q,i)=>{ out += `${i+1}. ${q.texto}\\nR: ${groupData.respostas[q.campo]||'(em branco)'}\\n\\n`; });
+  out += `— AULA 8: APRESENTAÇÃO E NEGOCIAÇÃO —\\n`;
+  const camposA8 = [
+    ['a8_tipo_uc','Tipo de UC defendido'],['a8_prioridades','Prioridades de proteção'],
+    ['a8_anotacoes_apresentacao','Anotações sobre outros grupos'],['a8_neg_manter','Propostas mantidas'],
+    ['a8_neg_ajustes','Ajustes/concessões feitas'],['a8_neg_essencial','Decisões essenciais']
+  ];
+  camposA8.forEach(([c,l])=>{ out += `${l}: ${groupData.respostas[c]||'(em branco)'}\\n`; });
+  out += `\\n— PLANO DE MANEJO —\\n`;
+  PLANO_TOPICOS.forEach(t=>{ out += `${t.titulo}\\nPergunta-guia: ${t.pergunta}\\nResposta: ${groupData.respostas[t.id]||'(em branco)'}\\n\\n`; });
+  out += `— CONEXÕES COM OUTRAS AULAS —\\n`;
+  AULAS_CONEXAO.forEach(a=>{
+    const c = groupData.respostas['reflexao_'+a.id];
+    if(c) out += `${a.titulo}: ${c}\\n`;
+  });
+  return out;
+}
+
+function gerarTextoDoc(){
+  document.getElementById('docOut').value = textoCompletoGrupo();
+}
+
+function gerarCSVParticipacao(){
+  const porAluno = {};
+  groupData.log.forEach(l=>{
+    porAluno[l.numero] = porAluno[l.numero] || {nome:l.aluno, palavras:0, contrib:0};
+    porAluno[l.numero].palavras += l.palavras;
+    porAluno[l.numero].contrib += 1;
+  });
+  let out = 'Timestamp\\tGrupo\\tNúmero\\tAluno\\tContribuições\\tPalavras\\n';
+  const now = new Date().toLocaleString('pt-BR');
+  Object.keys(porAluno).forEach(num=>{
+    const d = porAluno[num];
+    out += `${now}\\t${currentGroupId}\\t${num}\\t${d.nome}\\t${d.contrib}\\t${d.palavras}\\n`;
+  });
+  document.getElementById('sheetOut').value = out;
+}
+
+function copiarCampo(id){
+  const el = document.getElementById(id);
+  el.select();
+  document.execCommand('copy');
+}
+
+function salvarScriptUrl(){
+  const url = document.getElementById('scriptUrlInput').value.trim();
+  if(url){ localStorage.setItem('apps_script_url', url); atualizarStatusSync(); }
+}
+function atualizarStatusSync(){
+  const url = localStorage.getItem('apps_script_url');
+  const box = document.getElementById('syncStatusBox');
+  if(url){
+    box.innerHTML = `<b>Conectado.</b> Endereço configurado: <span class="mono">${url.slice(0,42)}...</span>`;
+    document.getElementById('scriptUrlInput').value = url;
+  } else {
+    box.textContent = 'Nenhum endereço de integração configurado ainda nesta plataforma.';
+  }
+}
+
+async function enviarTudoAgora(){
+  const url = localStorage.getItem('apps_script_url');
+  gerarTextoDoc();
+  gerarCSVParticipacao();
+  if(!url){
+    alert('Nenhum endereço de Apps Script configurado. O texto e as linhas foram gerados nos campos abaixo — copie e cole manualmente, ou peça ao professor o endereço de integração.');
+    return;
+  }
+  try{
+    const payload = {
+      acao: 'salvarAtividade',
+      grupo: currentGroupId,
+      papel: PAPEIS[groupData.papel].nome,
+      membros: groupData.membros,
+      textoDoc: textoCompletoGrupo(),
+      participacao: groupData.log
+    };
+    await fetch(url, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(payload)
+    });
+    alert('Envio disparado! Como o Google Apps Script é acessado em modo restrito pelo navegador, confirme com o professor se os dados chegaram no Google Docs/Sheets.');
+  }catch(e){
+    alert('Não foi possível enviar automaticamente. Use a cópia manual abaixo como alternativa.');
+  }
+}
+
+function baixarCSVGeral(){
+  gerarCSVParticipacao();
+  const blob = new Blob([document.getElementById('sheetOut').value], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'participacao_grupo'+currentGroupId+'.csv';
+  a.click();
+}
+
+/* ============================================================
+   PAINEL DO PROFESSOR
+   ============================================================ */
+async function montarPainelProfessor(){
+  const grupos = [1,2,3,4,5];
+  // também tenta achar grupos livres visitados nesta sessão (armazenados localmente)
+  const tbodyG = document.querySelector('#tabelaGrupos tbody');
+  tbodyG.innerHTML = '';
+  for(const gid of grupos){
+    const data = (gid===currentGroupId) ? groupData : (await storeGet(groupKey(gid), true)) || defaultGroupData(gid, gid);
+    const totalCampos = PERGUNTAS_A7.length + 6 + PLANO_TOPICOS.length + AULAS_CONEXAO.length;
+    const preenchidos = Object.values(data.respostas||{}).filter(v=>v && v.trim().length>3).length;
+    const pct = Math.min(100, Math.round((preenchidos/totalCampos)*100));
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><b>Grupo ${gid}</b></td><td><span class="badge-role">${PAPEIS[data.papel].nome}</span></td>
+      <td><div class="bar-mini"><span style="width:${pct}%"></span></div>${pct}%</td>
+      <td>${(data.membros||[]).length} aluno(s)</td>`;
+    tbodyG.appendChild(tr);
+  }
+
+  const tbodyP = document.querySelector('#tabelaParticipacao tbody');
+  tbodyP.innerHTML = '';
+  const porAluno = {};
+  (groupData.log||[]).forEach(l=>{
+    porAluno[l.numero] = porAluno[l.numero] || {nome:l.aluno, palavras:0, contrib:0};
+    porAluno[l.numero].palavras += l.palavras;
+    porAluno[l.numero].contrib += 1;
+  });
+  groupData.membros.forEach(m=>{
+    if(!porAluno[m.numero]) porAluno[m.numero] = {nome:m.nome, palavras:0, contrib:0};
+  });
+  const maxPalavras = Math.max(1, ...Object.values(porAluno).map(d=>d.palavras));
+  Object.keys(porAluno).forEach(num=>{
+    const d = porAluno[num];
+    const engaj = Math.round((d.palavras/maxPalavras)*100);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${d.nome}</td><td>Grupo ${currentGroupId}</td><td>${d.contrib}</td><td>${d.palavras}</td>
+      <td><div class="bar-mini"><span style="width:${engaj}%"></span></div>${engaj}%</td>`;
+    tbodyP.appendChild(tr);
+  });
+}
+
+atualizarStatusSync();
+</script>
+</body>
+</html>
